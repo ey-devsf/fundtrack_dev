@@ -1,0 +1,34 @@
+<template>
+    <lightning-card>
+        <template if:true={error}>
+            <div class="error-text">{error}</div>
+        </template>
+
+        <template if:true={groupedView}>
+            <template for:each={groupedView} for:item="groupObj">
+                <div key={groupObj.group} class="group-block">
+                    <div class="group-title">{groupObj.group}</div>
+
+                    <template for:each={groupObj.sections} for:item="sectionObj">
+                        <div key={sectionObj.section} class="section-block">
+                            <div class="section-title">{sectionObj.section}</div>
+                            <div class="input-wrap">
+                                <template for:each={sectionObj.fields} for:item="field">
+                                    <div key={field.key} class="input-item">
+                                        <lightning-input
+                                            type="number"
+                                            label={field.label}
+                                            class="fixed-input"
+                                            data-key={field.key}
+                                            onchange={handleInputChange}
+                                        ></lightning-input>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

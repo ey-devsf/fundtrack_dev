@@ -1,0 +1,31 @@
+[
+  { "key": "rakuten_bank_balance", "label": "楽天銀行-残高", "group": "現金", "section": "楽天銀行" },
+  { "key": "gmo_aozora_main", "label": "GMOあおぞら銀行-親口座", "group": "現金", "section": "GMOあおぞら銀行" },
+  { "key": "gmo_aozora_insurance_tax", "label": "GMOあおぞら銀行-社会保険・税金準備金", "group": "現金", "section": "GMOあおぞら銀行" },
+  { "key": "gmo_aozora_emergency_fund", "label": "GMOあおぞら銀行-生活防衛資金", "group": "現金", "section": "GMOあおぞら銀行" },
+  { "key": "gmo_aozora_move_fund", "label": "GMOあおぞら銀行-引越準備金", "group": "現金", "section": "GMOあおぞら銀行" },
+  { "key": "gmo_aozora_pc_saving", "label": "GMOあおぞら銀行-パソコン貯金", "group": "現金", "section": "GMOあおぞら銀行" },
+  { "key": "gmo_aozora_phone_saving", "label": "GMOあおぞら銀行-スマホ貯金", "group": "現金", "section": "GMOあおぞら銀行" },
+  { "key": "sbi_bank_balance", "label": "SBI銀行-残高", "group": "現金", "section": "SBI銀行" },
+  { "key": "sbi_securities_cash", "label": "SBI証券-買付余力", "group": "現金", "section": "SBI証券" },
+
+  { "key": "rakuten_card_amount_due", "label": "楽天カード-請求額", "group": "クレカ", "section": "楽天カード" },
+  { "key": "smbc_card_amount_due", "label": "三井住友カード-請求額", "group": "クレカ", "section": "三井住友カード" },
+
+  { "key": "prudential_life_refund", "label": "プルデンシャル生命-解約返戻金", "group": "投資", "section": "プルデンシャル生命" },
+  { "key": "rakuten_ideco", "label": "楽天証券-iDeCo", "group": "投資", "section": "楽天証券" },
+  { "key": "sbi_securities_sp500", "label": "SBI証券-特定-S&P500", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_securities_all_country", "label": "SBI証券-特定-オルカン", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_securities_india", "label": "SBI証券-特定-iFreeインド", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_securities_sumitomo_world", "label": "SBI証券-特定-三井住友全世界インデックス", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_securities_vti", "label": "SBI証券-特定-VTI", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_nisa_growth_sp500", "label": "SBI証券-成長NISA-S&P500", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_nisa_growth_all_country", "label": "SBI証券-成長NISA-オルカン", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_nisa_growth_india", "label": "SBI証券-成長NISA-iFreeインド", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_nisa_growth_stocks", "label": "SBI証券-成長NISA-個別株合計", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_nisa_tsumitate_sp500", "label": "SBI証券-積立NISA-S&P500", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_nisa_tsumitate_all_country", "label": "SBI証券-積立NISA-オルカン", "group": "投資", "section": "SBI証券" },
+  { "key": "sbi_nisa_old_all_country", "label": "SBI証券-旧NISA-オルカン", "group": "投資", "section": "SBI証券" },
+  { "key": "bitflyer_bitcoin", "label": "bitflyer-Bitcoin", "group": "投資", "section": "bitFlyer" },
+  { "key": "bitflyer_ethereum", "label": "bitflyer-Ethereum", "group": "投資", "section": "bitFlyer" }
+]
