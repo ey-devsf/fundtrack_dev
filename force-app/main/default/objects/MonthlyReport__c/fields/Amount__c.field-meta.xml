@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount__c</fullName>
+    <label>Amount</label>
+    <summarizedField>MonthlyInputRow__c.Amount__c</summarizedField>
+    <summaryFilterItems>
+        <field>MonthlyInputRow__c.Category1__c</field>
+        <operation>equals</operation>
+        <value>楽天銀行,クレカ</value>
+    </summaryFilterItems>
+    <summaryForeignKey>MonthlyInputRow__c.MonthlyReport__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

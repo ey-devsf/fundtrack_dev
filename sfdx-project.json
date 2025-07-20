@@ -6,7 +6,7 @@
     }
   ],
   "name": "fundTrack",
-  "namespace": "",
+  "namespace": "fundTrack_Dev",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "64.0"
 }
