@@ -1,5 +1,5 @@
 <template>
-    <lightning-card>
+    <div class="container">
         <template if:true={error}>
             <div class="error-text">{error}</div>
         </template>
@@ -30,8 +30,8 @@
                 </div>
             </template>
         </template>
-        <div class="slds-m-around_medium">
+        <div class="slds-m-around_medium save-button-wrap">
             <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
         </div>
-    </lightning-card>
+    </div>
 </template>

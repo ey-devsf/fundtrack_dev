@@ -53,13 +53,13 @@ public with sharing class MonthlyInputFormCtrl {
 
             Map<String, Object> cfg = configByKey.get(keyVal);
             String label = cfg != null ? (String)cfg.get('label') : keyVal;
-            String group = cfg != null ? (String)cfg.get('group') : null;
-            String section = cfg != null ? (String)cfg.get('section') : null;
+            String groupName = cfg != null ? (String)cfg.get('group') : null;
+            String sectionName = cfg != null ? (String)cfg.get('section') : null;
 
             MonthlyInputRow__c row = new MonthlyInputRow__c(
                 Name = label,
-                Category1__c = group,
-                Category2__c = section,
+                Category1__c = groupName,
+                Category2__c = sectionName,
                 Category3__c = keyVal,
                 Amount__c = Decimal.valueOf(amount)
             );
