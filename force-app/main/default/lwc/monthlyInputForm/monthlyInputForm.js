@@ -1,5 +1,6 @@
 import { LightningElement, wire, track } from 'lwc';
 import getInputFieldConfigJson from '@salesforce/apex/MonthlyInputFormCtrl.getInputFieldConfigJson';
+import saveInputRows from '@salesforce/apex/MonthlyInputFormCtrl.saveInputRows';
 
 export default class MonthlyInputForm extends LightningElement {
     @track groupedView = []; // 表示用構造
@@ -43,5 +44,15 @@ export default class MonthlyInputForm extends LightningElement {
     handleInputChange(event) {
         const key = event.target.dataset.key;
         this.inputValues[key] = event.target.value;
+    }
+
+    handleSave() {
+        saveInputRows({ inputMap: this.inputValues })
+            .then(() => {
+                this.inputValues = {};
+            })
+            .catch((error) => {
+                this.error = error.body ? error.body.message : error.message;
+            });
     }
 }

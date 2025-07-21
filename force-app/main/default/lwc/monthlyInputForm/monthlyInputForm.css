@@ -1,3 +1,8 @@
+.container {
+    background-color: #fff;
+    padding: 4px;
+}
+
 .group-title {
     background-color: #f3f2f2;
     font-size: 1.2rem;
@@ -29,4 +34,15 @@
 
 .fixed-input lightning-input {
     width: 200px;
+}
+
+.save-button-wrap {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.save-button-wrap lightning-button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
 }
