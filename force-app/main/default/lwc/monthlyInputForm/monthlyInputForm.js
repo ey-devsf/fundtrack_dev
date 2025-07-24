@@ -1,42 +1,48 @@
 import { LightningElement, wire, track } from 'lwc';
-import getInputFieldConfigJson from '@salesforce/apex/MonthlyInputFormCtrl.getInputFieldConfigJson';
-import saveInputRows from '@salesforce/apex/MonthlyInputFormCtrl.saveInputRows';
+import init from '@salesforce/apex/MonthlyInputFormCtrl.init';
+// import saveInputRows from '@salesforce/apex/MonthlyInputFormCtrl.saveInputRows';
 
 export default class MonthlyInputForm extends LightningElement {
-    @track groupedView = []; // 表示用構造
-    @track inputValues = {};
+    isLoading = false;
+    groupedView = []; // 表示用構造
+    inputValues = {};
     error;
 
-    @wire(getInputFieldConfigJson)
-    wiredFieldConfig({ error, data }) {
-        if (data) {
-            try {
-                const parsed = JSON.parse(data);
-                this.groupedView = this.buildGroupedView(parsed);
-            } catch (e) {
-                this.error = 'JSON Parse Error: ' + e.message;
-            }
-        } else if (error) {
-            this.error = error.body.message || error.message;
-        }
+    connectedCallback() {
+        this.isLoading = true;
+        init()
+            .then((data) => {
+                try {
+                    const parsed = JSON.parse(data);
+                    this.groupedView = this.buildGroupedView(parsed);
+                } catch (e) {
+                    this.error = 'JSON Parse Error: ' + e.message;
+                }
+            })
+            .catch((error) => {
+                this.error = error.body?.message || error.message;
+            })
+            .finally(() => {
+                this.isLoading = false;
+            });
     }
 
     buildGroupedView(items) {
         const map = new Map();
-        for (const { group, section, key, label } of items) {
-            if (!map.has(group)) map.set(group, new Map());
-            const sectionMap = map.get(group);
-            if (!sectionMap.has(section)) sectionMap.set(section, []);
-            sectionMap.get(section).push({ key, label });
+        for (const { groupLabel, sectionLabel, key, label } of items) {
+            if (!map.has(groupLabel)) map.set(groupLabel, new Map());
+            const sectionMap = map.get(groupLabel);
+            if (!sectionMap.has(sectionLabel)) sectionMap.set(sectionLabel, []);
+            sectionMap.get(sectionLabel).push({ key, label });
         }
 
         const result = [];
-        for (const [group, sectionMap] of map) {
+        for (const [groupLabel, sectionMap] of map) {
             const sections = [];
-            for (const [section, fields] of sectionMap) {
-                sections.push({ section, fields });
+            for (const [sectionLabel, fields] of sectionMap) {
+                sections.push({ sectionLabel, fields });
             }
-            result.push({ group, sections });
+            result.push({ groupLabel, sections });
         }
         return result;
     }

@@ -1,17 +1,19 @@
 <template>
     <div class="container">
-        <template if:true={error}>
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <template lwc:if={error}>
             <div class="error-text">{error}</div>
         </template>
 
-        <template if:true={groupedView}>
+        <template lwc:if={groupedView}>
             <template for:each={groupedView} for:item="groupObj">
-                <div key={groupObj.group} class="group-block">
-                    <div class="group-title">{groupObj.group}</div>
-
+                <div key={groupObj.groupLabel} class="group-block">
+                    <div class="group-title">{groupObj.groupLabel}</div>
                     <template for:each={groupObj.sections} for:item="sectionObj">
-                        <div key={sectionObj.section} class="section-block">
-                            <div class="section-title">{sectionObj.section}</div>
+                        <div key={sectionObj.sectionLabel} class="section-block">
+                            <div class="section-title">{sectionObj.sectionLabel}</div>
                             <div class="input-wrap">
                                 <template for:each={sectionObj.fields} for:item="field">
                                     <div key={field.key} class="input-item">
@@ -29,9 +31,9 @@
                     </template>
                 </div>
             </template>
+            <div class="slds-m-around_medium save-button-wrap">
+                <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
+            </div>
         </template>
-        <div class="slds-m-around_medium save-button-wrap">
-            <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
-        </div>
     </div>
 </template>
