@@ -9,21 +9,6 @@
         <field>MonthlyInputRow__c.Amount__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MonthlyInputRow__c.Category1__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MonthlyInputRow__c.Category2__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MonthlyReport__c.Category__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Fund Track Dev - Admin</label>
     <objectPermissions>
@@ -52,6 +37,10 @@
     </tabSettings>
     <tabSettings>
         <tab>MonthlyReport__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>TAB_MontlyInputFrom</tab>
         <visibility>Visible</visibility>
     </tabSettings>
 </PermissionSet>

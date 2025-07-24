@@ -12,7 +12,9 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>Fund Track Dev</label>
     <navType>Standard</navType>
+    <tabs>TAB_MontlyInputFrom</tabs>
     <tabs>MonthlyInputRow__c</tabs>
+    <tabs>MonthlyReport__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Fund_Track_Dev_UtilityBar</utilityBar>
 </CustomApplication>
