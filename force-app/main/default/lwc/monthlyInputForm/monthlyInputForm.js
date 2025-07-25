@@ -29,11 +29,11 @@ export default class MonthlyInputForm extends LightningElement {
 
     buildGroupedView(items) {
         const map = new Map();
-        for (const { groupLabel, sectionLabel, key, label } of items) {
+        for (const { groupLabel, sectionLabel, key, label, value } of items) {
             if (!map.has(groupLabel)) map.set(groupLabel, new Map());
             const sectionMap = map.get(groupLabel);
             if (!sectionMap.has(sectionLabel)) sectionMap.set(sectionLabel, []);
-            sectionMap.get(sectionLabel).push({ key, label });
+            sectionMap.get(sectionLabel).push({ key, label, value });
         }
 
         const result = [];
