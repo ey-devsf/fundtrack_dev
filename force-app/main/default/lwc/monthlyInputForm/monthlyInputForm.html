@@ -1,7 +1,9 @@
 <template>
     <div class="container">
-        <template lwc:if={isLoading}>
-            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        <template lwc:if={isVisibleSpinner}>
+            <div class="spinner-overlay">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
         </template>
         <template lwc:if={error}>
             <div class="error-text">{error}</div>

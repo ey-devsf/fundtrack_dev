@@ -3,17 +3,14 @@ import init from '@salesforce/apex/MonthlyInputFormCtrl.init';
 import saveInputRows from '@salesforce/apex/MonthlyInputFormCtrl.saveInputRows';
 
 export default class MonthlyInputForm extends LightningElement {
-    isLoading = false;
+    isVisibleSpinner = false;
+    isLoaded = false;
     groupedView = []; // 表示用構造
     inputValues = {};
     error;
     
-    get isLoaded() {
-        return !this.isLoading;
-    }
-    
     connectedCallback() {
-        this.isLoading = true;
+        this.isVisibleSpinner = true;
         init()
             .then((data) => {
                 try {
@@ -27,7 +24,8 @@ export default class MonthlyInputForm extends LightningElement {
                 this.error = error.body?.message || error.message;
             })
             .finally(() => {
-                this.isLoading = false;
+                this.isVisibleSpinner = false;
+                this.isLoaded = true;
             });
     }
 
@@ -52,6 +50,7 @@ export default class MonthlyInputForm extends LightningElement {
     }
 
     handleSave() {
+        this.isVisibleSpinner = true;
         const inputs = this.template.querySelectorAll('lightning-input.amount-input');
         const inputMap = {};
         const targetMonth = '2025-07-01';
@@ -70,6 +69,9 @@ export default class MonthlyInputForm extends LightningElement {
             })
             .catch((error) => {
                 this.error = error.body ? error.body.message : error.message;
+            })
+            .finally(() => {
+                this.isVisibleSpinner = false;
             });
     }
 }

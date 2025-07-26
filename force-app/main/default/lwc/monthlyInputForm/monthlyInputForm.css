@@ -1,5 +1,6 @@
 .container {
     background-color: #fff;
+    position: relative;
     padding: 4px;
 }
 
@@ -45,4 +46,18 @@
 .save-button-wrap lightning-button {
     font-size: 1rem;
     padding: 0.75rem 1.5rem;
+}
+
+
+.spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
