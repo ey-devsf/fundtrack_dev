@@ -7,7 +7,7 @@
             <div class="error-text">{error}</div>
         </template>
 
-        <template lwc:if={groupedView}>
+        <template lwc:if={isLoaded}>
             <template for:each={groupedView} for:item="groupObj">
                 <div key={groupObj.groupLabel} class="group-block">
                     <div class="group-title">{groupObj.groupLabel}</div>

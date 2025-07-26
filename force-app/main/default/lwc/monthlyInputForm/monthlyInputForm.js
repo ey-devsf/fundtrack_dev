@@ -7,7 +7,11 @@ export default class MonthlyInputForm extends LightningElement {
     groupedView = []; // 表示用構造
     inputValues = {};
     error;
-
+    
+    get isLoaded() {
+        return !this.isLoading;
+    }
+    
     connectedCallback() {
         this.isLoading = true;
         init()
