@@ -1,6 +1,7 @@
 import { LightningElement, wire, track } from 'lwc';
 import init from '@salesforce/apex/MonthlyInputFormCtrl.init';
 import saveInputRows from '@salesforce/apex/MonthlyInputFormCtrl.saveInputRows';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class MonthlyInputForm extends LightningElement {
     isVisibleSpinner = false;
@@ -22,6 +23,7 @@ export default class MonthlyInputForm extends LightningElement {
             })
             .catch((error) => {
                 this.error = error.body?.message || error.message;
+                this.showToast('Error', this.error, 'error');
             })
             .finally(() => {
                 this.isVisibleSpinner = false;
@@ -49,6 +51,15 @@ export default class MonthlyInputForm extends LightningElement {
         return result;
     }
 
+    showToast(title, message, variant) {
+        const toastEvent = new ShowToastEvent({
+            title,
+            message,
+            variant,
+        });
+        this.dispatchEvent(toastEvent);
+    }
+
     handleSave() {
         this.isVisibleSpinner = true;
         const inputs = this.template.querySelectorAll('lightning-input.amount-input');
@@ -66,9 +77,11 @@ export default class MonthlyInputForm extends LightningElement {
         saveInputRows({ inputMap, targetMonth })
             .then(() => {
                 this.inputValues = {};
+                this.showToast('Success', 'Input rows saved successfully.', 'success');
             })
             .catch((error) => {
                 this.error = error.body ? error.body.message : error.message;
+                this.showToast('Error', `Failed to save input rows: ${this.error}`, 'error');
             })
             .finally(() => {
                 this.isVisibleSpinner = false;
