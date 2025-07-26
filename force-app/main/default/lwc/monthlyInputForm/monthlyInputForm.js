@@ -1,6 +1,6 @@
 import { LightningElement, wire, track } from 'lwc';
 import init from '@salesforce/apex/MonthlyInputFormCtrl.init';
-// import saveInputRows from '@salesforce/apex/MonthlyInputFormCtrl.saveInputRows';
+import saveInputRows from '@salesforce/apex/MonthlyInputFormCtrl.saveInputRows';
 
 export default class MonthlyInputForm extends LightningElement {
     isLoading = false;
@@ -47,13 +47,20 @@ export default class MonthlyInputForm extends LightningElement {
         return result;
     }
 
-    handleInputChange(event) {
-        const key = event.target.dataset.key;
-        this.inputValues[key] = event.target.value;
-    }
-
     handleSave() {
-        saveInputRows({ inputMap: this.inputValues })
+        const inputs = this.template.querySelectorAll('lightning-input.amount-input');
+        const inputMap = {};
+        const targetMonth = '2025-07-01';
+    
+        inputs.forEach(input => {
+            const key = input.dataset.key;
+            const value = input.value;
+            if (key) {
+                inputMap[key] = value ? parseFloat(value) : null;
+            }
+        });
+    
+        saveInputRows({ inputMap, targetMonth })
             .then(() => {
                 this.inputValues = {};
             })

@@ -21,41 +21,37 @@ public with sharing class MonthlyInputFormCtrl {
         
         return formFields != null ? JSON.serialize(formFields) : '[]';
     }
-    // @AuraEnabled
-    // public static void saveInputRows(Map<String, Integer> inputMap) {
-    //     // if (inputMap == null || inputMap.isEmpty()) {
-    //     //     return;
-    //     // }
 
-    //     // Map<String, Map<String, Object>> configByKey = new Map<String, Map<String, Object>>();
-    //     // List<Object> configs = (List<Object>)JSON.deserializeUntyped(getInputFieldConfigJson());
-    //     // for (Object obj : configs) {
-    //     //     Map<String, Object> cfg = (Map<String, Object>)obj;
-    //     //     configByKey.put((String)cfg.get('key'), cfg);
-    //     // }
+    @AuraEnabled
+    public static void saveInputRows(Map<String, Integer> inputMap, String targetMonth) {
+        MonthlyInputFormQueryService queryService = new MonthlyInputFormQueryService();
+        Map<String, MonthlyInputRow__c> savedInputRows = convertToInputRowMap(queryService.getInputRows(Date.today()));
+        List<MonthlyInputRow__c> upsertInputRows = new List<MonthlyInputRow__c>();
 
-    //     // List<MonthlyInputRow__c> rows = new List<MonthlyInputRow__c>();
-    //     // for (String keyVal : inputMap.keySet()) {
-    //     //     Integer amount = inputMap.get(keyVal);
-    //     //     if (amount == null) continue;
+        for (String key : inputMap.keySet()) {
+            Integer value = inputMap.get(key);
+            MonthlyInputRow__c row = savedInputRows.get(key);
+            if (row == null) {
+                row = new MonthlyInputRow__c();
+                row.FormFieldKey__c = key;
+            }
+            row.Amount__c = value == null ? 0 : Decimal.valueOf(value);
+            row.Month__c = Date.valueOf(targetMonth);
+            upsertInputRows.add(row);
+        }
 
-    //     //     Map<String, Object> cfg = configByKey.get(keyVal);
-    //     //     String label = cfg != null ? (String)cfg.get('label') : keyVal;
-    //     //     String groupName = cfg != null ? (String)cfg.get('group') : null;
-    //     //     String sectionName = cfg != null ? (String)cfg.get('section') : null;
+        if (!upsertInputRows.isEmpty()) {
+            upsert upsertInputRows;
+        }
+    }
 
-    //     //     MonthlyInputRow__c row = new MonthlyInputRow__c(
-    //     //         Name = label,
-    //     //         Category1__c = groupName,
-    //     //         Category2__c = sectionName,
-    //     //         Category3__c = keyVal,
-    //     //         Amount__c = Decimal.valueOf(amount)
-    //     //     );
-    //     //     rows.add(row);
-    //     }
-
-    //     // if (!rows.isEmpty()) {
-    //     //     insert rows;
-    //     // }
-    // }
+    private static Map<String, MonthlyInputRow__c> convertToInputRowMap(List<MonthlyInputRow__c> inputRows) {
+        Map<String, MonthlyInputRow__c> inputRowMap = new Map<String, MonthlyInputRow__c>();
+        for (MonthlyInputRow__c row : inputRows) {
+            if (row.FormFieldKey__c != null) {
+                inputRowMap.put(row.FormFieldKey__c, row);
+            }
+        }
+        return inputRowMap;
+    }
 }
