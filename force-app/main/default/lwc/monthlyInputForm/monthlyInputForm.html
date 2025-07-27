@@ -5,33 +5,43 @@
                 <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
             </div>
         </template>
-        <template lwc:if={error}>
-            <div class="error-text">{error}</div>
-        </template>
-
         <template lwc:if={isLoaded}>
-            <template for:each={groupedView} for:item="groupObj">
-                <div key={groupObj.groupLabel} class="group-block">
-                    <div class="group-title">{groupObj.groupLabel}</div>
-                    <template for:each={groupObj.sections} for:item="sectionObj">
-                        <div key={sectionObj.sectionLabel} class="section-block">
-                            <div class="section-title">{sectionObj.sectionLabel}</div>
-                            <div class="input-wrap">
-                                <template for:each={sectionObj.fields} for:item="field">
-                                    <div key={field.key} class="input-item">
-                                        <lightning-input
-                                            type="number"
-                                            label={field.label}
-                                            class="amount-input"
-                                            value={field.value}
-                                            data-key={field.key}
-                                        ></lightning-input>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                    </template>
+            <template lwc:if={error}>
+                <div class="error-text">{error}</div>
+            </template>
+            <template lwc:else>
+                <div class="month-input-wrap">
+                    <lightning-input
+                        type="date"
+                        label="Target Month"
+                        class="month-input"
+                        value={targetMonth}
+                        onchange={handleMonthChange}
+                    ></lightning-input>
                 </div>
+                <template for:each={groupedView} for:item="groupObj">
+                    <div key={groupObj.groupLabel} class="group-block">
+                        <div class="group-title">{groupObj.groupLabel}</div>
+                        <template for:each={groupObj.sections} for:item="sectionObj">
+                            <div key={sectionObj.sectionLabel} class="section-block">
+                                <div class="section-title">{sectionObj.sectionLabel}</div>
+                                <div class="input-wrap">
+                                    <template for:each={sectionObj.fields} for:item="field">
+                                        <div key={field.key} class="input-item">
+                                            <lightning-input
+                                                type="number"
+                                                label={field.label}
+                                                class="amount-input"
+                                                value={field.value}
+                                                data-key={field.key}
+                                            ></lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
             </template>
             <div class="slds-m-around_medium save-button-wrap">
                 <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
